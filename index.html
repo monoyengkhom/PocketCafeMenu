@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pocket Cafe Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* Base Styling */
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      color: #3e2c22;
+      background-color: #fef8f2;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Full background image */
+    body::before {
+      content: "";
+      background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.15;
+      z-index: -1;
+    }
+
+    header {
+      background-color: #8d6748;
+      text-align: center;
+      padding: 25px;
+      color: #fff;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.7em;
+    }
+    header h2 {
+      margin: 5px 0 0;
+      font-size: 1.1em;
+      font-weight: 400;
+      color: #f9e5d8;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background-color: #fff6ef;
+      border-bottom: 1px solid #dcc9bb;
+    }
+    .topbar input {
+      padding: 8px 12px;
+      border: 1px solid #ccb9a9;
+      border-radius: 8px;
+      width: 220px;
+    }
+    .topbar button {
+      font-size: 1.5em;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      color: #6b4f3b;
+    }
+
+    .menu-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      padding: 40px;
+    }
+    .menu-section {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.07);
+      transition: transform 0.2s ease;
+    }
+    .menu-section:hover {
+      transform: translateY(-3px);
+    }
+    .menu-section h3 {
+      border-bottom: 2px solid #b08968;
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+      color: #6b4226;
+    }
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px dashed #d1bfae;
+    }
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #6b4226;
+      color: #fff0e0;
+    }
+
+    /* Optional dark mode */
+    body.dark-mode {
+      background-color: #2e1f17;
+      color: #f5f5f5;
+    }
+    body.dark-mode .menu-section {
+      background-color: rgba(40, 30, 20, 0.95);
+    }
+    body.dark-mode header,
+    body.dark-mode footer {
+      background-color: #1d110c;
+      color: #e5d0b7;
+    }
+    body.dark-mode .topbar {
+      background-color: #392b20;
+    }
+    body.dark-mode .topbar input {
+      background-color: #2d2119;
+      color: #fff;
+      border-color: #6b4f3b;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pocket Cafe</h1>
+    <h2>Hotel Haren Grand</h2>
+  </header>
+
+  <div class="topbar">
+    <input type="text" id="searchInput" placeholder="Search menu...">
+    <button onclick="toggleDarkMode()" title="Toggle Theme">☕</button>
+  </div>
+
+  <div class="menu-container" id="menuContainer">
+    <div class="menu-section">
+      <h3>Biriyani</h3>
+      <div class="menu-item"><span>Veg Biriyani</span><span>₹150</span></div>
+      <div class="menu-item"><span>Chicken Biriyani</span><span>₹250</span></div>
+      <div class="menu-item"><span>Mutton Biriyani</span><span>₹450</span></div>
+    </div>
+
+    <div class="menu-section">
+      <h3>Noodles</h3>
+      <div class="menu-item"><span>Korean Ramen</span><span>₹300</span></div>
+      <div class="menu-item"><span>Veg Hakka Noodles</span><span>₹150</span></div>
+      <div class="menu-item"><span>Chicken Hakka Noodles</span><span>₹200</span></div>
+      <div class="menu-item"><span>Plain Maggi</span><span>₹100</span></div>
+      <div class="menu-item"><span>Chicken Maggi</span><span>₹150</span></div>
+      <div class="menu-item"><span>Egg Maggi</span><span>₹120</span></div>
+      <div class="menu-item"><span>Cheese Maggi</span><span>₹120</span></div>
+    </div>
+
+    <div class="menu-section">
+      <h3>Tandoori</h3>
+      <div class="menu-item"><span>Tandoori Chicken</span><span>₹500</span></div>
+      <div class="menu-item"><span>Chicken Tikka</span><span>₹250</span></div>
+      <div class="menu-item"><span>Chicken Seekh Kabab</span><span>₹250</span></div>
+    </div>
+
+    <div class="menu-section">
+      <h3>Chinese (Gravy)</h3>
+      <div class="menu-item"><span>Veg Manchurian</span><span>₹200</span></div>
+      <div class="menu-item"><span>Chilly Chicken Gravy</span><span>₹250</span></div>
+      <div class="menu-item"><span>Garlic Chicken Gravy</span><span>₹280</span></div>
+      <div class="menu-item"><span>Chicken Manchurian Gravy</span><span>₹300</span></div>
+    </div>
+
+    <div class="menu-section">
+      <h3>Salad</h3>
+      <div class="menu-item"><span>Green Salad</span><span>₹100</span></div>
+      <div class="menu-item"><span>Onion Salad</span><span>₹70</span></div>
+      <div class="menu-item"><span>Fry Papad</span><span>₹40</span></div>
+      <div class="menu-item"><span>Masala Papad</span><span>₹60</span></div>
+      <div class="menu-item"><span>Roast Papad</span><span>₹30</span></div>
+    </div>
+
+    <div class="menu-section">
+      <h3>Beverages</h3>
+      <div class="menu-item"><span>Black Tea</span><span>₹30</span></div>
+      <div class="menu-item"><span>Milk Tea</span><span>₹50</span></div>
+      <div class="menu-item"><span>Coffee</span><span>₹50</span></div>
+      <div class="menu-item"><span>Cold Drink</span><span>₹60</span></div>
+      <div class="menu-item"><span>Fresh Lime Water</span><span>₹60</span></div>
+      <div class="menu-item"><span>Fresh Lime Soda</span><span>₹60</span></div>
+      <div class="menu-item"><span>Lassi</span><span>₹80</span></div>
+      <div class="menu-item"><span>Packaged Drinking Water</span><span>₹20</span></div>
+      <div class="menu-item"><span>Green Tea</span><span>₹50</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Pocket Cafe, Hotel Haren Grand</p>
+    <p>📍 Six Mile, GS Road, Guwahati, Assam - 781022</p>
+    <p>📞 Contact: 9707377223</p>
+  </footer>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    document.getElementById("searchInput").addEventListener("input", function () {
+      const query = this.value.toLowerCase();
+      const items = document.querySelectorAll(".menu-item");
+      items.forEach((item) => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(query) ? "flex" : "none";
+      });
+    });
+  </script>
+</body>
+</html>
